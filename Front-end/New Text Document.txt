@@ -1,0 +1,111 @@
+<template>
+    <div>
+        <b-container>
+            <b-row>
+                <b-col cols="10" >
+                    <b-row id="info-box"  ref="infoBox" >
+                        <!-- <b-col>Hello <br> hello</b-col> -->
+                        <b-col v-if="boxW.b1">Hello1</b-col>
+                        <b-col v-if="boxW.b2">Hello2</b-col>
+                        <b-col v-if="boxW.b3">Hello3</b-col>
+                        <b-col v-if="boxW.b4">Hello4</b-col>
+                        <b-col v-if="boxW.b5">Hello5</b-col>
+                        <b-col v-if="boxW.b6">Hello6</b-col>
+                        <b-col v-if="boxW.b7">Hello7</b-col>
+                        
+                    </b-row>
+                </b-col>
+                <b-col cols="2">
+                    Drop
+                </b-col>
+            </b-row>
+        </b-container>
+        <!-- <button @click="array[0]=false">hello</button> -->
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+            changed:0,
+            begin:7,
+            boxHeight:0,
+            boxW:{
+                b1:true,
+                b2:true,
+                b3:true,
+                b4:true,
+                b5:true,
+                b6:true,
+                b7:true,
+                // b8:true,
+            }
+        }
+    },
+            mounted () {
+        let height = this.$refs.infoBox.clientHeight;
+        console.log(height);
+        this.boxHeight=height;
+         this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.changed=window.innerWidth
+      });
+    })
+ },
+ watch:{
+     changed(){
+        //  this.array[1]=0;
+        //   this.array[2]=0;
+        //    this.array[3]=0;
+        //    console.log(this.array);
+         this.boxHeight= this.$refs.infoBox.clientHeight;
+        //  console.log(this.boxHeight)
+        //  var temp = this.array.length;
+         while (this.boxHeight!=24) {
+              console.log("BOX"+this.boxHeight);
+             if(this.begin<1)
+                break;
+             console.log("BEGIN"+this.begin);
+             this.decresingWith(this.begin);
+             this.begin=this.begin-1;
+             break;
+             this.boxHeight= this.$refs.infoBox.clientHeight;
+             if (this.boxHeight==24) {
+                 break;
+             }
+             
+         }
+     }
+ },
+ methods:{
+     decresingWith(num){
+         if(num==1)
+            this.boxW.b1=false;
+         if(num==2)
+            this.boxW.b2=false;
+         if(num==3)
+            this.boxW.b3=false;
+         if(num==4)
+            this.boxW.b4=false;
+         if(num==5)
+            this.boxW.b5=false;
+         if(num==6)
+            this.boxW.b6=false;
+         if(num==7)
+            this.boxW.b7=false;
+        
+     }
+ }
+
+}
+</script>
+
+<style scoped>
+#info-box{
+    /* height: 150px; */
+    border-style: solid;
+    border-color: black;
+}
+</style>
+
